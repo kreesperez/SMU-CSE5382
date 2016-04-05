@@ -11,6 +11,7 @@
 
 
 Game* Game::m_instance = nullptr;
+
 Camera Game::Camera;
 
 using namespace std;

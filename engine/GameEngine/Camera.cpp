@@ -10,14 +10,14 @@
 #include "Camera.h"
 
 
-Matrix& Camera::GetProjectionMatrix()
+Matrix& Camera::GetProjectionMatrix() // 
 {
-    /// check aspect
+    // check aspect
     int w, h;
     
     Game::GetFramebufferSize(&w, &h);
     
-    float aspect = w * 1.f / h;
+    aspect = w * 1.f / h;
     
     if (aspect != m_previousAspectRatio)
     {
@@ -31,8 +31,8 @@ Matrix& Camera::GetProjectionMatrix()
 
 Matrix& Camera::GetViewMatrix()
 {
-    auto t = Transform.Translation * -1.f;
-    auto r = Transform.Rotation * -1.f;
+    auto t = Transform->Translation * -1.f;
+    auto r = Transform->Rotation * -1.f;
     
     m_viewMatrix = Matrix::CreateRotation(r) * Matrix::CreateTranslation(t);
     

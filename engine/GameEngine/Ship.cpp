@@ -25,14 +25,28 @@ bool Ship::OnInitialize()
     /// narrow triangle pointed along the positive Y axis
     vector<float> vertices =
     {
-        0,0.5f, 0
+        0,1.0f, 0.0f        //vert 0 x, y, z
         ,
-        1/3.f, -0.5f, 0
+        0.5f, -1.0f, -.5f   //vert 1 x, y, z
         ,
-        -1/3.f, -0.5f, 0
+        -.5f, -1.0f, -.5f   //vert 2 x, y, z
+        //------------//
+        ,
+        0.5f, -1.0f, .5f    //vert 3 x, y, z
+        ,
+        -.5f, -1.0f, .5f    //vert 4 x, y, z
+        
+        
+        
     };
     
-    vector<GLushort> indices = {0,1,2};
+    vector<GLushort> indices = {
+        0,2,1,
+        0,3,4,
+        0,1,3,
+        0,4,2,
+        2,3,1,
+        2,4,3};
     
     mesh.Initialize(vertices, indices);
     
@@ -44,7 +58,7 @@ bool Ship::OnInitialize()
     m_material = &material;
     
     mesh.Material = &material;
-    material.FillType = PolygonMode::Line;
+    material.FillType = PolygonMode::Fill;
     
     
     return material.Build("Shaders/primitive");
@@ -52,7 +66,59 @@ bool Ship::OnInitialize()
 
 void Ship::OnUpdate(const GameTime& time)
 {
+    float speed = time.ElapsedSeconds() * .1;
+    if (glfwGetKey(Game::Instance().Window(),GLFW_KEY_UP) == GLFW_PRESS)
+    {
+        float x = Transform->Up().X;
+        float y = Transform->Up().Y;
+        push(speed*x, speed*y, 0, time);
+    }
+    if (glfwGetKey(Game::Instance().Window(),GLFW_KEY_DOWN) == GLFW_PRESS)
+    {
+        push(0, speed, 0, time);
+    }
     
+    
+   /*------------------------------------------------------------------------------------------------------*/
+    if (glfwGetKey(Game::Instance().Window(),GLFW_KEY_LEFT) == GLFW_PRESS)
+    {
+    
+        rotateZ(-0.17453292f); // rotate 10 degrees
+    }
+    
+    
+    if (glfwGetKey(Game::Instance().Window(),GLFW_KEY_RIGHT) == GLFW_PRESS)
+    {
+        rotateZ(0.17453292f);
+    }
+    
+    
+    /*------------------------------------------------------------------------------------------------------*/
+   
+    if (glfwGetKey(Game::Instance().Window(),GLFW_KEY_W) == GLFW_PRESS)
+    {
+        rotateX(-0.17453292f);
+    }
+    if (glfwGetKey(Game::Instance().Window(),GLFW_KEY_S) == GLFW_PRESS)
+    {
+        rotateX(0.17453292f);
+    }
+    
+    
+    /*------------------------------------------------------------------------------------------------------*/
+
+    if (glfwGetKey(Game::Instance().Window(),GLFW_KEY_A) == GLFW_PRESS)
+    {
+        rotateY(-0.17453292f);
+    }
+    if (glfwGetKey(Game::Instance().Window(),GLFW_KEY_D) == GLFW_PRESS)
+    {
+        rotateY(0.17453292f);
+    }
+    
+    /*------------------------------------------------------------------------------------------------------*/
+    updateShipPosition();
+    WorldEntity::OnUpdate(time);
 }
 
 
@@ -60,11 +126,18 @@ void Ship::OnRender(const GameTime& time)
 {
     auto& cam = Game::Camera;
     
+    
     m_material->Bind();
 
-    m_material->SetUniform("World", Transform.GetMatrix());
+    m_material->SetUniform("World", Transform->GetMatrix());
     m_material->SetUniform("View",cam.GetViewMatrix());
     m_material->SetUniform("Projection",cam.GetProjectionMatrix());
+    check_gl_error();
 }
+void Ship::updateShipPosition(){
+    WorldPos.X = this->Transform->Translation.X;
+    WorldPos.Y = this->Transform->Translation.Y;
+    WorldPos.Z = this->Transform->Translation.Z;
 
+}
 

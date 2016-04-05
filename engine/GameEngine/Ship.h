@@ -16,7 +16,8 @@
 class Ship : public WorldEntity
 {
 public:
-    
+    Vector3 WorldPos;
+
     Ship()
     {
         
@@ -26,6 +27,8 @@ public:
     
     void OnUpdate(const GameTime& time) override;
     void OnRender(const GameTime& time) override;
+    void Wrap();
+    void updateShipPosition();
 private:
     Mesh* m_mesh;
     Material* m_material;

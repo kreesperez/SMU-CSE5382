@@ -7,13 +7,14 @@ uniform mat4 Projection;
 in vec3 Pos;
 
 out vec4 Color;
+out vec4 position;
 
 void main()
 {
-    vec4 position = vec4(Pos,1);
+    position = vec4(Pos,1);
     
-    position = Projection * View * World * position;    
+    position = View * World * position;
     
-    Color = vec4(1);
-    gl_Position = position;
+    Color = vec4(0,1,1,1); //R,G,B,_
+    gl_Position = Projection * position;
 }

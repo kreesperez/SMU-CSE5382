@@ -32,10 +32,11 @@ void main()
     
     float theta = fract(GameTimeTotalSeconds * TimeScale) * 360;
 
-    /// rotate about origin
-    position = rotate(position, TO_RADIANS(theta));
+    // rotate about origin
+    //position = rotate(position, TO_RADIANS(theta));
     
-    Color = vec4(position.xyz, 1);
-    
+    //Color = vec4(position.xyz, 1);
+    Color = vec4(cos(position.x),sin(position).y,tan(position.z),1);
+
     gl_Position = position;
 }

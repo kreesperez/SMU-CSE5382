@@ -20,6 +20,8 @@ public:
     float FieldOfView;
     float ZNear;
     float ZFar;
+    float aspect;
+    
     
     Camera() : FieldOfView(TO_RADIANS(45)), ZNear(1), ZFar(1000)
     {

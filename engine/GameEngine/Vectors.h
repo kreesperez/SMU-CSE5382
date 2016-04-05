@@ -9,6 +9,9 @@
 #ifndef VECTORS_H
 #define VECTORS_H
 
+#include <ostream>
+
+
 
 struct Vector2
 {
@@ -47,6 +50,34 @@ struct Vector3 : public Vector2
     }
     
     template<typename T>
+    inline Vector3 operator/ (const T& divisor) const
+    {
+        return Vector3(X/divisor, Y/divisor, Z/divisor);
+    }
+    
+    Vector3 operator* (const Vector3 multiplier)
+    {
+        return Vector3(X * multiplier.X, Y * multiplier.Y, Z * multiplier.Z);
+    }
+    
+    Vector3 operator*= (const Vector3 rval)
+    {
+        X *= rval.X;
+        Y *= rval.Y;
+        Z *= rval.Z;
+        
+        return *this;
+    }
+    Vector3 operator/= (const Vector3 rval)
+    {
+        X /= rval.X;
+        Y /= rval.Y;
+        Z /= rval.Z;
+        
+        return *this;
+    }
+    
+    template<typename T>
     inline Vector3& operator*=(const T& rval)
     {
         X *= rval;
@@ -75,6 +106,16 @@ struct Vector3 : public Vector2
         
         return *this;
     }
+    
+//    template<typename T>
+//    inline Vector3& operator/=(const T& rval)
+//    {
+//        X /= rval.X;
+//        Y /= rval.Y;
+//        Z /= rval.Z;
+//        
+//        return *this;
+//    }
 
     template<typename T>
     inline Vector3& operator=(const T& rval)
@@ -86,6 +127,35 @@ struct Vector3 : public Vector2
         return *this;
     }
     
+    template<typename T>
+    inline Vector3 operator-(const T& rval)
+    {
+        Vector3 temp;
+        temp.X = X-rval.X;
+        temp.Y = Y-rval.Y;
+        temp.Z = Z-rval.Z;
+        
+        return temp;
+    }
+    
+    inline Vector3 operator-(const float rval)
+    {
+        Vector3 temp;
+        temp.X = X-rval;
+        temp.Y = Y-rval;
+        temp.Z = Z-rval;
+        
+        return temp;
+    }
+    
+    
+    friend std::ostream &operator<<(std::ostream &out, Vector3 v)     //output
+    {
+        out << v.X << "," << v.Y << "," << v.Z;
+
+        return out;
+    }
+
     
     
 };
@@ -101,9 +171,51 @@ struct Vector4 : public Vector3
     
     Vector4(float x, float y, float z, float w) : Vector3(x,y,z)
     {
+        W = w;
         
     }
 };
+
+inline float dotProduct(Vector3 a, Vector3 b)
+{
+    // a . b
+    
+    float dot;
+    
+    dot = (a.X * b.X) + (a.Y * b.Y) + (a.Z * b.Z);
+    
+    return dot;
+    
+};
+
+
+inline float dotProduct(Vector4 a, Vector4 b)
+{
+    // a . b
+    
+    float dot;
+    
+    dot = (a.X * b.X) + (a.Y * b.Y) + (a.Z * b.Z) + (a.W * b.W);
+    
+    return dot;
+    
+};
+inline Vector3 crossProduct(Vector3 a, Vector3 b)
+{
+    //a X b
+    
+    Vector3 temp;
+    
+    temp.X = (a.Y * b.Z)-(a.Z * b.Y);
+    temp.Y = (a.Z * b.X)-(a.X * b.Z);
+    temp.Z = (a.X * b.Y)-(a.Y * b.X);
+    
+    return temp;
+    
+};
+
+
+
 
 
 #endif /* Vectors_hpp */

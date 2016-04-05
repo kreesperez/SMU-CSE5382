@@ -70,6 +70,8 @@ bool Material::Build(string vertexShaderSource, string fragmentShaderSource)
 	check_gl_error();
 
 	gl::LinkProgram(m_program);
+    
+    Log::Info << GetProgramLog(m_program);
 
 	check_gl_error();
 

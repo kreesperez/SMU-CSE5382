@@ -14,19 +14,19 @@
 #include "Vectors.h"
 #include "Matrix.h"
 
-class Transform 
+class Transform : public GameObject
 {
 public:
     Vector3 Translation;
     Vector3 Rotation;
     Vector3 Scale;
-    
+        
     Transform()
     {
         Scale.X = Scale.Y = Scale.Z = 1;
     }
     
-    Matrix GetMatrix()
+    Matrix GetMatrix()   //translate to gamespace, model coord to world space
     {
         auto mt = Matrix::CreateTranslation(Translation);
         auto mr = Matrix::CreateRotation(Rotation);
@@ -40,11 +40,9 @@ public:
     Vector3 Up()
     {
         auto m = GetMatrix();
-
-        return Vector3(m.m10, m.m11, m.m12);        
-        
+        return Vector3(m.m10, m.m11, m.m12); 
     }
-    
+private:
     
 };
 

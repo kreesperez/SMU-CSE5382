@@ -53,6 +53,10 @@ void Mesh::OnRender(const GameTime& time)
     /// unbind the program
     gl::UseProgram(0);
     
+    gl::Enable(gl::DEPTH_TEST);
+    gl::Enable(gl::CULL_FACE);
+    gl::FrontFace(gl::CW);
+    
     check_gl_error();
 }
 

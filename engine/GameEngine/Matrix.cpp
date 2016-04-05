@@ -202,6 +202,29 @@ Matrix Matrix::CreatePerspective(float fov, float aspect, float zNear, float zFa
     return m;
 }
 
+#define ROW(r) Vector4(m ## r ## 0, m ## r ## 1, m ## r ## 2, m ## r ## 3)
+#define COL(r) Vector4(m ## 0 ## r, m ## 1 ## r, m ## 2 ## r, m ## 3 ## r)
+
+
+Vector4 Matrix::Transform(const Vector4& v) const
+{
+    
+    auto col0 = COL(0);
+    auto col1 = COL(1);
+    auto col2 = COL(2);
+    auto col3 = COL(3);
+    
+    Vector4 temp;
+    
+    temp.X = dotProduct(v,col0);
+    temp.Y = dotProduct(v,col1);
+    temp.Z = dotProduct(v,col2);
+    temp.W = dotProduct(v,col3);
+    
+    
+    return temp;
+}
+
 
 
 

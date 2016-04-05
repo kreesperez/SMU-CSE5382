@@ -73,6 +73,12 @@ public:
         return Multiply(*this, right);
     }
     
+    Vector4 Transform(const Vector4& v) const;
+    Vector3 Transform(const Vector3& v) const
+    {
+        return (Vector3)Transform(Vector4(v.X, v.Y, v.Z, 1));
+    }
+    
     
 private:
 };
