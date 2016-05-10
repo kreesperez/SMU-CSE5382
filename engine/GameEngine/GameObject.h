@@ -31,7 +31,8 @@ public:
         Id = ++m_nextId;
     }
     
-    
+    void Enable();
+    void Disable();
     virtual void OnPreUpdate(const GameTime& time) {}
     virtual void OnUpdate(const GameTime& time) {}
     virtual void OnPostUpdate(const GameTime& time) {}
@@ -42,6 +43,7 @@ public:
     
     virtual void Render(const GameTime& time);
     virtual void Update(const GameTime& time);
+    
     
     virtual void OnDispose() {}
     
@@ -98,6 +100,7 @@ public:
         return nullptr;
     }
     
+    
 private:
     std::vector<GameObject*> m_children;
 
@@ -113,8 +116,9 @@ private:
     static int m_nextId;
     
     
-protected:
     
+public:
+    bool enabled = true;
     
 };
 

@@ -61,6 +61,8 @@
 		A6BE86761C6B96F900B62F67 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9831A2C51C56A11A005F2989 /* OpenGL.framework */; };
 		DC3C70BA1CA9BB3E003CBE66 /* Missile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DC3C70B81CA9BB3E003CBE66 /* Missile.cpp */; };
 		DC3C70BB1CA9BB3E003CBE66 /* Missile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DC3C70B81CA9BB3E003CBE66 /* Missile.cpp */; };
+		DC68BA651CDD43F7002FED75 /* BoundSphere.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DC68BA631CDD43F7002FED75 /* BoundSphere.cpp */; };
+		DC68BA661CDD43F7002FED75 /* BoundSphere.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DC68BA631CDD43F7002FED75 /* BoundSphere.cpp */; };
 		DCBED1911CA313C200CF543F /* GeometryProvider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DCBED1901CA313C200CF543F /* GeometryProvider.cpp */; };
 		DCBED1921CA313C200CF543F /* GeometryProvider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DCBED1901CA313C200CF543F /* GeometryProvider.cpp */; };
 		DCDCC0471CB3019A00BF620C /* PerlinNoise.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DCDCC0451CB3019A00BF620C /* PerlinNoise.cpp */; };
@@ -165,7 +167,9 @@
 		98F4ADB11C60087700D98467 /* Mesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mesh.h; sourceTree = "<group>"; };
 		A6BE867B1C6B96F900B62F67 /* GameEngine10_11 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = GameEngine10_11; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC3C70B81CA9BB3E003CBE66 /* Missile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Missile.cpp; sourceTree = "<group>"; };
-		DC3C70B91CA9BB3E003CBE66 /* Missile.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Missile.hpp; sourceTree = "<group>"; };
+		DC3C70B91CA9BB3E003CBE66 /* Missile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Missile.h; sourceTree = "<group>"; };
+		DC68BA631CDD43F7002FED75 /* BoundSphere.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BoundSphere.cpp; sourceTree = "<group>"; };
+		DC68BA641CDD43F7002FED75 /* BoundSphere.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoundSphere.h; sourceTree = "<group>"; };
 		DCBED18F1CA3138B00CF543F /* GeometryProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeometryProvider.h; sourceTree = "<group>"; };
 		DCBED1901CA313C200CF543F /* GeometryProvider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GeometryProvider.cpp; sourceTree = "<group>"; };
 		DCDCC0451CB3019A00BF620C /* PerlinNoise.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PerlinNoise.cpp; sourceTree = "<group>"; };
@@ -335,7 +339,7 @@
 				98F4ADB01C60087700D98467 /* Mesh.cpp */,
 				98F4ADB11C60087700D98467 /* Mesh.h */,
 				DC3C70B81CA9BB3E003CBE66 /* Missile.cpp */,
-				DC3C70B91CA9BB3E003CBE66 /* Missile.hpp */,
+				DC3C70B91CA9BB3E003CBE66 /* Missile.h */,
 				98D48EE81C624E0F00C3A36B /* Resource.cpp */,
 				98D48EE91C624E0F00C3A36B /* Resource.h */,
 				980D9BEF1C7E254100C30167 /* Ship.cpp */,
@@ -348,6 +352,8 @@
 				980D9BE21C7E23A400C30167 /* WorldEntity.h */,
 				DCDCC0451CB3019A00BF620C /* PerlinNoise.cpp */,
 				DCDCC0461CB3019A00BF620C /* PerlinNoise.h */,
+				DC68BA631CDD43F7002FED75 /* BoundSphere.cpp */,
+				DC68BA641CDD43F7002FED75 /* BoundSphere.h */,
 			);
 			name = Engine;
 			sourceTree = "<group>";
@@ -431,6 +437,7 @@
 				98F03C331C5FCC77008EEF9B /* glError.cpp in Sources */,
 				9831A2F31C56A221005F2989 /* gl_core_4_3.cpp in Sources */,
 				98BD50D51C6BAB0A004A88C1 /* Matrix.cpp in Sources */,
+				DC68BA651CDD43F7002FED75 /* BoundSphere.cpp in Sources */,
 				98F03C361C5FDD5D008EEF9B /* Files.cpp in Sources */,
 				9831A2ED1C56A221005F2989 /* etc1_utils.c in Sources */,
 				980D9BE71C7E23A400C30167 /* Camera.cpp in Sources */,
@@ -466,6 +473,7 @@
 				A6BE86651C6B96F900B62F67 /* glError.cpp in Sources */,
 				A6BE86661C6B96F900B62F67 /* gl_core_4_3.cpp in Sources */,
 				98BD50D61C6BAB0A004A88C1 /* Matrix.cpp in Sources */,
+				DC68BA661CDD43F7002FED75 /* BoundSphere.cpp in Sources */,
 				A6BE86671C6B96F900B62F67 /* Files.cpp in Sources */,
 				A6BE86681C6B96F900B62F67 /* etc1_utils.c in Sources */,
 				980D9BE81C7E23A400C30167 /* Camera.cpp in Sources */,

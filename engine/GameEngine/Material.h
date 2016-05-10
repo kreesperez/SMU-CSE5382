@@ -17,9 +17,27 @@
 #include "Enums.h"
 
 
+
 class Material : public GameObject
 {
 public:
+    //colors to use
+    
+    Vector4 Cyan = Vector4(0,1,1,1);
+    Vector4 Blue = Vector4(0,0,1,1);
+    Vector4 Green = Vector4(0,1,0,1);
+    Vector4 Yellow = Vector4(1,1,0,1);
+    Vector4 Orange = Vector4(1,.5,0,1);
+    Vector4 Red = Vector4(1,0,0,1);
+    
+    Vector4 Magenta = Vector4(1,0,1,1);
+    Vector4 White = Vector4(1,1,1,1);
+    
+    std::vector<Vector4> colors = {Blue,Cyan, Green, Yellow, Orange, Red};
+    
+    //asteroida life cycle = 1 blue, 2 cyan, 3 green, 4 yellow, 5 orange, 6 red
+
+    
     PolygonMode FillType = PolygonMode::Fill;
     
     
@@ -84,8 +102,11 @@ public:
     {
         gl::UniformMatrix4fv(location, 1, false, &m.m00);
     }
-
-
+    inline void SetUniform(int location, const Vector4& v)
+    {
+        gl::Uniform4f(location, v.X, v.Y, v.Z, v.W);
+    }
+    void setColor(Vector4 color);
 
 private:
     GLuint m_program;

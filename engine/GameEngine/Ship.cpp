@@ -59,9 +59,11 @@ bool Ship::OnInitialize()
     
     mesh.Material = &material;
     material.FillType = PolygonMode::Fill;
+    bounds.setSphereBounds(Transform->Translation, 1.f);
     
-    
+    material.SetUniform("Color",material.White);
     return material.Build("Shaders/primitive");
+    
 }
 
 void Ship::OnUpdate(const GameTime& time)
@@ -75,7 +77,7 @@ void Ship::OnUpdate(const GameTime& time)
     }
     if (glfwGetKey(Game::Instance().Window(),GLFW_KEY_DOWN) == GLFW_PRESS)
     {
-        push(0, speed, 0, time);
+        //push(0, speed, 0, time);
     }
     
     
@@ -83,13 +85,13 @@ void Ship::OnUpdate(const GameTime& time)
     if (glfwGetKey(Game::Instance().Window(),GLFW_KEY_LEFT) == GLFW_PRESS)
     {
     
-        rotateZ(-0.17453292f); // rotate 10 degrees
+        rotateZ(-0.08726646f); // rotate 10 degrees
     }
     
     
     if (glfwGetKey(Game::Instance().Window(),GLFW_KEY_RIGHT) == GLFW_PRESS)
     {
-        rotateZ(0.17453292f);
+        rotateZ(0.08726646f);
     }
     
     
@@ -97,23 +99,22 @@ void Ship::OnUpdate(const GameTime& time)
    
     if (glfwGetKey(Game::Instance().Window(),GLFW_KEY_W) == GLFW_PRESS)
     {
-        rotateX(-0.17453292f);
+        rotateX(-0.08726646f);
     }
     if (glfwGetKey(Game::Instance().Window(),GLFW_KEY_S) == GLFW_PRESS)
     {
-        rotateX(0.17453292f);
+        rotateX(0.08726646f);
     }
-    
     
     /*------------------------------------------------------------------------------------------------------*/
 
     if (glfwGetKey(Game::Instance().Window(),GLFW_KEY_A) == GLFW_PRESS)
     {
-        rotateY(-0.17453292f);
+        rotateY(-0.08726646f);
     }
     if (glfwGetKey(Game::Instance().Window(),GLFW_KEY_D) == GLFW_PRESS)
     {
-        rotateY(0.17453292f);
+        rotateY(0.08726646f);
     }
     
     /*------------------------------------------------------------------------------------------------------*/
@@ -132,12 +133,26 @@ void Ship::OnRender(const GameTime& time)
     m_material->SetUniform("World", Transform->GetMatrix());
     m_material->SetUniform("View",cam.GetViewMatrix());
     m_material->SetUniform("Projection",cam.GetProjectionMatrix());
+    m_material->SetUniform("Color",m_material->White);
+    
     check_gl_error();
 }
+
+
 void Ship::updateShipPosition(){
     WorldPos.X = this->Transform->Translation.X;
     WorldPos.Y = this->Transform->Translation.Y;
     WorldPos.Z = this->Transform->Translation.Z;
 
 }
+
+
+
+
+
+
+
+
+
+
 

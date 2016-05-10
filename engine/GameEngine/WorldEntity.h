@@ -11,7 +11,8 @@
 
 #include "GameObject.h"
 #include "Transform.h"
-#include "Common.h" 
+#include "Common.h"
+#include "BoundSphere.h"
 
 /*enum class FrustumAction{
  
@@ -22,11 +23,12 @@
 class WorldEntity : public GameObject
 {
 public:
+    BoundSphere bounds;
     Transform *Transform, *TransformPrev;
     float prevTime = 0.0166;
     float velocity;
     //save curr position and then calc velocity
-    float drag = 0.001f;
+    float drag = 0.01f;
     void push(float x, float y, float z, const GameTime& gtime);
     void rotateX(float rad);
     void rotateY(float rad);
@@ -37,6 +39,8 @@ public:
     void checkBound();
     float tBound, bBound, lBound, rBound;
     void Move(Vector3 newPos);
+    void Move(float x, float y, float z);
+    void setCenter();
     
     WorldEntity(){
         

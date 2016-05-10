@@ -63,11 +63,15 @@ void GameObject::DoRender(const GameTime& time)
     
     OnRender(time);
     
-    for (auto it = begin(m_children); it != end(m_children); ++it)
+    if(enabled == true)
     {
-        if (nullptr != *it)
-            (*it)->DoRender(time);
+        for (auto it = begin(m_children); it != end(m_children); ++it)
+        {
+            if (nullptr != *it)
+                (*it)->DoRender(time);
+        }
     }
+    
     
 }
 
@@ -89,21 +93,30 @@ void GameObject::DoPostRender(const GameTime& time)
 
 void GameObject::Update(const GameTime& time)
 {
-    
-    DoPreUpdate(time);
-    DoUpdate(time);
-    DoPostUpdate(time);
+    if(enabled == true)
+    {
+        DoPreUpdate(time);
+        DoUpdate(time);
+        DoPostUpdate(time);
+    }
 }
 
 void GameObject::Render(const GameTime& time)
 {
-    check_gl_error();
+    if(enabled == true)
+    {
+        check_gl_error();
     
-    DoPreRender(time);
-    DoRender(time);
-    DoPostRender(time);
+        DoPreRender(time);
+        DoRender(time);
+        DoPostRender(time);
     
-    check_gl_error();
+        check_gl_error();
+    }
+    else
+    {
+        cout << "not enabled: Use Enable() to render" << endl;
+    }
 }
 
 
@@ -133,6 +146,18 @@ void GameObject::Dispose()
     
     OnDispose();
     
+}
+
+void GameObject::Enable()
+{
+    Log::Info << "GameObject::Disable()\n";
+    enabled = true;
+}
+
+void GameObject::Disable()
+{
+    Log::Info << "GameObject::Disable()\n";
+    enabled = false;
 }
 
 

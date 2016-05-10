@@ -27,7 +27,7 @@ public:
 	/// real time - not frame dependent
 	std::string AppTime()
 	{
-		float total = (float)glfwGetTime();
+		//float total = (float)glfwGetTime();
         
         return "GameTime::AppTime() - NOT IMPLEMENTED";
 	}

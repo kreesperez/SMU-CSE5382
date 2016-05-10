@@ -9,10 +9,7 @@
 
 void WorldEntity::push(float x, float y, float z, const GameTime& gtime){
     
-//    x *= Transform->Up().X;
-//    y *= Transform->Up().Y;
-    
-    Transform->Translation += Vector3(x,y,z);//*Transform->Up();
+    Transform->Translation += Vector3(x,y,z);
    
 }
 
@@ -52,6 +49,9 @@ void WorldEntity::OnUpdate(const GameTime& time){
     TransformPrev->Translation = Transform->Translation;
     Transform->Translation += (velocity*(1.0f-drag));
     
+    setCenter();
+    
+    
 }
 
 void WorldEntity::Move(Vector3 newPos)
@@ -61,7 +61,25 @@ void WorldEntity::Move(Vector3 newPos)
     TransformPrev->Translation = newPos - velocity;
 }
 
+void WorldEntity::Move(float x, float y, float z)
+{
+    //Vector3 velocity = Transform->Translation - TransformPrev->Translation;
+    Transform->Translation.X = x;
+    Transform->Translation.Y = y;
+    Transform->Translation.Z = z;
+    
+    TransformPrev->Translation.X = x;
+    TransformPrev->Translation.Y = y;
+    TransformPrev->Translation.Z = z;
 
+    
+}
+
+
+void WorldEntity::setCenter(){
+    bounds.position = Transform->Translation;
+
+}
     
     
 

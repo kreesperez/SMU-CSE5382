@@ -13,14 +13,18 @@
 #include <string>
 using namespace std;
 
+/*
+ make color a parameter, and on render tell material what color it is
 
+ 4fv pointer and a num of elements
+ */
 
 void Material::SetUniforms(const GameTime& time)
 {
+    //SetUniform("Color", White);
 	SetUniform("GameTimeTotalSeconds", time.TotalSeconds());
 	SetUniform("TimeScale", 0.5f);
 }
-
 
 bool Material::Build(string vertexShaderSource, string fragmentShaderSource)
 {
@@ -110,7 +114,7 @@ string Material::GetShaderLog(GLuint shader)
 		gl::GetShaderInfoLog(shader, logLength, &returnedLength, logBuffer);
 		log = string(logBuffer);
 
-		delete logBuffer;
+		delete[] logBuffer; //gave warning, cahngeed to delete[] from delete
 	}
 
 	return log;
@@ -139,7 +143,7 @@ string Material::GetProgramLog(GLuint program)
 
 		log = string(logBuffer);
 
-		delete logBuffer;
+		delete[] logBuffer; //gave warning changed from delete to delete[]
 	}
 
 	return log;
